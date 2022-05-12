@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 public class HelloWorldServiceImpl implements HelloWorldService{
 
     private final HelloWorldRepository helloWorldRepository;
+    private final CounterService counterService;
 
     @Override
     public String getHelloWorld() {
-        return helloWorldRepository.fetchHelloWorld();
+        counterService.updateCounter();
+        return helloWorldRepository.fetchHelloWorld() + " "
+                + counterService.fetchCounter().toString();
     }
 }
